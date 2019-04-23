@@ -19,3 +19,5 @@ Build:
 ToDo:
 * Add script to run prettier and tslint when pushing the code from your local branch.
 * Add sass
+* Add routing
+* Add history (basically SPA)
