@@ -1,5 +1,5 @@
-import { TodoModel } from "./models";
-import { TodoActions } from "./actions";
+import { TodoModel } from './models';
+import { TodoActions } from './actions';
 
 export declare namespace TodoItem_Types {
   interface Props {
@@ -14,7 +14,6 @@ export declare namespace TodoItem_Types {
   }
 }
 
-
 export declare namespace TodoTextInput {
   export interface Props {
     text?: string;
@@ -28,4 +27,13 @@ export declare namespace TodoTextInput {
     text: string;
   }
 }
-  
+
+export declare namespace Profile {
+  export interface Props {}
+
+  export interface State {
+    editing?: boolean;
+    isSaving?: boolean;
+    isLoading?: boolean;
+  }
+}

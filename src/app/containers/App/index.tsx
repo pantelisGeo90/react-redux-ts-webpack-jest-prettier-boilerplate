@@ -2,12 +2,12 @@ import * as React from 'react';
 import * as style from './style.css';
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
-import { RouteComponentProps } from 'react-router';
+import { RouteComponentProps } from 'react-router-dom';
 import { TodoActions } from 'app/actions';
 import { RootState } from 'app/reducers';
 import { TodoModel } from 'app/models';
 import { omit } from 'app/utils';
-import TodoList  from 'app/components/TodoList';
+import TodoList from 'app/components/TodoList';
 import Header from 'app/components/Header';
 import Footer from 'app/components/Footer';
 
