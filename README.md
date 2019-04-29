@@ -18,7 +18,10 @@ Build:
 
 ToDo:
 * Add script to run prettier and tslint when pushing the code from your local branch.
+* Add sass
+* Add storybook
+
+Done:
+* Add react-router-dom - history (basically SPA
 * Add normalized.css
 * Add missing `types`
-* Add sass
-* Add react-router-dom - history (basically SPA)
