@@ -22,6 +22,7 @@ ToDo:
 * Add storybook
 
 Done:
-* Add react-router-dom - history (basically SPA
-* Add normalized.css
-* Add missing `types`
+* Added react-router-dom - history (basically SPA
+* Added normalized.css
+* Added missing `types`
+* Added bootstrap css
