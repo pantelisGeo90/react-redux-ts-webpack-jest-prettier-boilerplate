@@ -1,4 +1,4 @@
-import { TodoModel } from './models';
+import { TodoModel, ProfileModel } from './models';
 import { TodoActions } from './actions';
 
 export declare namespace TodoItem_Types {
@@ -35,5 +35,6 @@ export declare namespace Profile {
     editing?: boolean;
     isSaving?: boolean;
     isLoading?: boolean;
+    profileModel: ProfileModel;
   }
 }
