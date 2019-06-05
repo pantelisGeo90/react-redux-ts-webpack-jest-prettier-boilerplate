@@ -1,5 +1,11 @@
 import * as React from 'react';
 import { Profile } from 'app/typings';
+import { ProfileActions } from 'app/actions/profile';
+import { RootState } from 'app/reducers';
+import { connect } from 'react-redux';
+import { bindActionCreators, Dispatch } from 'redux';
+import { omit } from 'app/utils';
+// import { ProfileModel } from 'app/models/ProfileModel';
 
 class Profile extends React.Component<Profile.Props, Profile.State> {
   constructor(props: Profile.Props, context?: any) {
@@ -7,21 +13,50 @@ class Profile extends React.Component<Profile.Props, Profile.State> {
     this.state = { isSaving: false, isLoading: true };
   }
 
-  componentDidMount() {
+  componentWillMount() {
+    const {
+      actions: { loadingProfile, loadedProfile }
+    } = this.props;
+    loadingProfile();
     setTimeout(() => {
-      this.setState({ isLoading: false });
+      loadedProfile({
+        id: 1,
+        username: 'pantelas',
+        age: 21,
+        dob: new Date()
+      });
     }, 1000);
   }
 
+  componentDidMount() {
+    // setTimeout(() => {
+    //   this.setState({ isLoading: false });
+    // }, 1000);
+  }
+
   saveChanges = () => {
-    this.setState({ isSaving: false });
+    const {
+      actions: { savingProfile, savedProfile }
+    } = this.props;
+    savingProfile();
     setTimeout(() => {
-      this.setState({ isSaving: false });
+      savedProfile();
     }, 700);
   };
 
+  handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const {
+      // profile,
+      actions: { changeProfile }
+    } = this.props;
+    changeProfile({ [event.currentTarget.name]: event.currentTarget.value } as any);
+  };
+
   render() {
-    const { isLoading } = this.state;
+    const {
+      profilePage: { isLoading },
+      profile
+    } = this.props;
     return (
       <>
         <header>
@@ -32,10 +67,15 @@ class Profile extends React.Component<Profile.Props, Profile.State> {
         ) : (
           <div>
             Username:
-            <input placeholder="username" />
+            <input
+              placeholder="username"
+              name="username"
+              value={profile.username}
+              onChange={this.handleChange}
+            />
             <br />
-            Address:
-            <input placeholder="address" />
+            Age:
+            <input placeholder="age" name="age" onChange={this.handleChange} value={profile.age} />
             <br />
             <br />
             <input type="button" value="Save" onClick={this.saveChanges} />
@@ -46,4 +86,20 @@ class Profile extends React.Component<Profile.Props, Profile.State> {
   }
 }
 
-export default Profile;
+function mapStateToProps(state: RootState) {
+  return {
+    profile: state.profile,
+    profilePage: state.profilePage
+  };
+}
+
+function matchDispatchToProps(dispatch: Dispatch) {
+  return {
+    actions: bindActionCreators(omit(ProfileActions, 'Type'), dispatch)
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  matchDispatchToProps
+)(Profile);
