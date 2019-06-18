@@ -11,6 +11,7 @@ var outPath = path.join(__dirname, './build');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var MiniCssExtractPlugin = require('mini-css-extract-plugin');
 var WebpackCleanupPlugin = require('webpack-cleanup-plugin');
+var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = {
   context: sourcePath,
@@ -107,6 +108,11 @@ module.exports = {
     runtimeChunk: true
   },
   plugins: [
+    new BundleAnalyzerPlugin({
+      generateStatsFile: true,
+      analyzerPort: 4000, // you can change this, default is 8888
+      mode: 'server'
+    }),
     new webpack.EnvironmentPlugin({
       NODE_ENV: 'development', // use 'development' unless process.env.NODE_ENV is defined
       DEBUG: false

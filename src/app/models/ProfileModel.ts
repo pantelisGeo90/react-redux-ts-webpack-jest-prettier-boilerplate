@@ -9,5 +9,6 @@ export interface ProfilePageModel {
   isLoading: boolean;
   isSaving: boolean;
   isSuccess: boolean;
+  isDone: boolean;
   errorMessage?: string;
 }

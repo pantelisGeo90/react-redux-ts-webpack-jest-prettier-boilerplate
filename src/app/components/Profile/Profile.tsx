@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
 import { omit } from 'app/utils';
 // import { ProfileModel } from 'app/models/ProfileModel';
+import { Button } from 'reactstrap';
 
 class Profile extends React.Component<Profile.Props, Profile.State> {
   constructor(props: Profile.Props, context?: any) {
@@ -36,9 +37,12 @@ class Profile extends React.Component<Profile.Props, Profile.State> {
 
   saveChanges = () => {
     const {
-      actions: { savingProfile, savedProfile }
+      actions: { saveProfile, savedProfile },
+      profile
     } = this.props;
-    savingProfile();
+
+    saveProfile(profile);
+
     setTimeout(() => {
       savedProfile();
     }, 700);
@@ -54,7 +58,7 @@ class Profile extends React.Component<Profile.Props, Profile.State> {
 
   render() {
     const {
-      profilePage: { isLoading },
+      profilePage: { isLoading, isSaving },
       profile
     } = this.props;
     return (
@@ -72,13 +76,22 @@ class Profile extends React.Component<Profile.Props, Profile.State> {
               name="username"
               value={profile.username}
               onChange={this.handleChange}
+              disabled={isSaving}
             />
             <br />
             Age:
-            <input placeholder="age" name="age" onChange={this.handleChange} value={profile.age} />
+            <input
+              placeholder="age"
+              name="age"
+              onChange={this.handleChange}
+              value={profile.age}
+              disabled={isSaving}
+            />
             <br />
             <br />
-            <input type="button" value="Save" onClick={this.saveChanges} />
+            <Button size="lg" color="success" onClick={this.saveChanges} disabled={isSaving}>
+              Save
+            </Button>
           </div>
         )}
       </>

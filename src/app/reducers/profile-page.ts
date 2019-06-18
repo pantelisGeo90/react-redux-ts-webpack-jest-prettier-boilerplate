@@ -6,7 +6,8 @@ import { ProfileActions } from 'app/actions/profile';
 const initialState: RootState.ProfilePageState = {
   isLoading: false,
   isSaving: false,
-  isSuccess: false
+  isSuccess: false,
+  isDone: false
 };
 
 export const profilePageReducer = handleActions<RootState.ProfilePageState, ProfileModel>(
@@ -18,6 +19,7 @@ export const profilePageReducer = handleActions<RootState.ProfilePageState, Prof
           isLoading: true,
           isSaving: false,
           isSuccess: false,
+          isDone: false,
           errorMessage: undefined
         } as ProfilePageModel)
       };
@@ -34,19 +36,21 @@ export const profilePageReducer = handleActions<RootState.ProfilePageState, Prof
           isLoading: false,
           isSuccess: isSuccess,
           isSaving: false,
+          isDone: true,
           errorMessage: ''
         } as ProfilePageModel)
       };
       console.log(toState);
       return toState;
     },
-    [ProfileActions.Type.SAVING_PROFILE]: (state, action) => {
+    [ProfileActions.Type.SAVE_PROFILE]: (state, action) => {
       return {
         ...state,
         ...({
           isSaving: true,
           isLoading: false,
           isSuccess: false,
+          isDone: false,
           errorMessage: undefined
         } as ProfilePageModel)
       };
@@ -58,6 +62,7 @@ export const profilePageReducer = handleActions<RootState.ProfilePageState, Prof
           isSaving: false,
           isLoading: false,
           isSuccess: false,
+          isDone: true,
           errorMessage: ''
         } as ProfilePageModel)
       };
