@@ -49,6 +49,7 @@ module.exports = {
       // css
       {
         test: /\.css$/,
+        exclude: /node_modules/,
         use: [
           isProduction ? MiniCssExtractPlugin.loader : 'style-loader',
           {
@@ -79,6 +80,12 @@ module.exports = {
             }
           }
         ]
+      },
+      // Second CSS Loader, including node_modules, allowing to load bootstrap globally over the whole project.
+      {
+        test: /\.css$/,
+        include: /node_modules/,
+        use: ['style-loader', 'css-loader']
       },
       // static assets
       { test: /\.html$/, use: 'html-loader' },
