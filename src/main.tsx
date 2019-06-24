@@ -6,8 +6,8 @@ import { BrowserRouter } from 'react-router-dom';
 import { App } from './app';
 
 import 'normalize.css';
-import 'bootstrap/dist/css/bootstrap.css';
 import '../styles/app.css';
+import 'bootstrap/dist/css/bootstrap.css';
 
 // prepare store
 const store = configureStore();

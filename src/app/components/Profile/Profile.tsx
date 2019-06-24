@@ -5,8 +5,8 @@ import { RootState } from 'app/reducers';
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
 import { omit } from 'app/utils';
-// import { ProfileModel } from 'app/models/ProfileModel';
-import { Button } from 'reactstrap';
+import { Button, Spinner, Jumbotron, Form, FormGroup, Label, Col, Input } from 'reactstrap';
+import Skeleton from 'react-loading-skeleton';
 
 class Profile extends React.Component<Profile.Props, Profile.State> {
   constructor(props: Profile.Props, context?: any) {
@@ -61,40 +61,74 @@ class Profile extends React.Component<Profile.Props, Profile.State> {
       profilePage: { isLoading, isSaving },
       profile
     } = this.props;
+
     return (
-      <>
-        <header>
-          <h1>Profile</h1>
-        </header>
-        {isLoading ? (
-          <p>Loading..</p>
-        ) : (
-          <div>
-            Username:
-            <input
-              placeholder="username"
-              name="username"
-              value={profile.username}
-              onChange={this.handleChange}
+      <Jumbotron>
+        <h1>Profile</h1>
+        <p>Edit your profile details</p>
+        <Form>
+          <FormGroup row>
+            <Label for="username" sm={2}>
+              {isLoading ? <Skeleton /> : `Username`}
+            </Label>
+            <Col sm={10}>
+              {isLoading ? (
+                <Skeleton height={37} />
+              ) : (
+                <Input
+                  type="text"
+                  name="username"
+                  id="username"
+                  placeholder="username"
+                  value={profile.username}
+                  onChange={this.handleChange}
+                  disabled={isSaving}
+                />
+              )}
+            </Col>
+          </FormGroup>
+          <FormGroup row>
+            <Label for="age" sm={2}>
+              {isLoading ? <Skeleton /> : `Age`}
+            </Label>
+            <Col sm={10}>
+              {isLoading ? (
+                <Skeleton height={37} />
+              ) : (
+                <Input
+                  type="number"
+                  name="age"
+                  id="age"
+                  placeholder="age"
+                  onChange={this.handleChange}
+                  value={profile.age}
+                  disabled={isSaving}
+                />
+              )}
+            </Col>
+          </FormGroup>
+          {isLoading ? (
+            <Skeleton width={75} height={47} />
+          ) : (
+            <Button
+              className={'with-loading'}
+              size="lg"
+              color="success"
+              onClick={this.saveChanges}
               disabled={isSaving}
-            />
-            <br />
-            Age:
-            <input
-              placeholder="age"
-              name="age"
-              onChange={this.handleChange}
-              value={profile.age}
-              disabled={isSaving}
-            />
-            <br />
-            <br />
-            <Button size="lg" color="success" onClick={this.saveChanges} disabled={isSaving}>
-              Save
+              type="submit"
+            >
+              {isSaving && (
+                <div>
+                  <Spinner size="sm" color="secondary" />
+                </div>
+              )}
+              <span>Save</span>
             </Button>
-          </div>
-        )}
-      </>
+          )}
+        </Form>
+        {/* )} */}
+      </Jumbotron>
     );
   }
 }
