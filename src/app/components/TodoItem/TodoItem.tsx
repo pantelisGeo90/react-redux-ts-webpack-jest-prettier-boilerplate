@@ -1,6 +1,6 @@
 import * as React from 'react';
 import classNames from 'classnames';
-import * as style from './style.css';
+import * as style from './style.scss';
 import TodoTextInput from 'app/components/TodoTextInput';
 import { TodoItem_Types } from 'app/typings';
 
