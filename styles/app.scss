@@ -9,8 +9,8 @@ button.with-loading {
 button.with-loading > div:nth-child(1) {
   position: absolute;
   width: calc(100% - 2rem);
-}
 
-button.with-loading > div:nth-child(1) > .spinner-border {
-  vertical-align: middle;
+  .spinner-border {
+    vertical-align: middle;
+  }
 }
