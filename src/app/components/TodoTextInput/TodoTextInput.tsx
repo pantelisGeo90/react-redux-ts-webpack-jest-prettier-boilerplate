@@ -1,6 +1,6 @@
 import * as React from 'react';
 import classNames from 'classnames';
-import style from './style.css';
+import style from './style.scss';
 import { TodoTextInput } from 'app/typings';
 
 class TodoTextInput extends React.Component<TodoTextInput.Props, TodoTextInput.State> {

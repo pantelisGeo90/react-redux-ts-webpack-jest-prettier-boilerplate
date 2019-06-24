@@ -1,5 +1,7 @@
 import { TodoModel } from './models';
 import { TodoActions } from './actions';
+import { ProfileModel, ProfilePageModel } from './models/ProfileModel';
+import { ProfileActions } from './actions/profile';
 
 export declare namespace TodoItem_Types {
   interface Props {
@@ -29,7 +31,11 @@ export declare namespace TodoTextInput {
 }
 
 export declare namespace Profile {
-  export interface Props {}
+  export interface Props {
+    profile: ProfileModel;
+    profilePage: ProfilePageModel;
+    actions: ProfileActions;
+  }
 
   export interface State {
     editing?: boolean;

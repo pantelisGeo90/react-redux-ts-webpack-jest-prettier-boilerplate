@@ -8,21 +8,24 @@ Navigate here to find more details on how to run the scripts and what dev depend
 https://github.com/rokoroku/react-redux-typescript-boilerplate
 
 To start developing:
+
 - Clone the repo
 - run `$ npm install`
 - run `$ npm run start:dev` to launch the website
 
 Build:
+
 - `$ npm run build`
 
-
 ToDo:
-* Add script to run prettier and tslint when pushing the code from your local branch.
-* Add sass
-* Add storybook
+
+- Add script to run prettier and tslint when pushing the code from your local branch.
+- Add storybook
 
 Done:
-* Added react-router-dom - history (basically SPA
-* Added normalized.css
-* Added missing `types`
-* Added bootstrap css
+
+- Added react-router-dom - history (basically SPA)
+- Added normalized.css
+- Added missing `types`
+- Added Bootstrap & Reactstrap
+- Added sass

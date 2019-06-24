@@ -1,7 +1,7 @@
 import * as React from 'react';
-import * as style from './style.css';
+import * as style from './style.scss';
 import { TodoActions } from 'app/actions/todos';
-import  TodoItem from 'app/components/TodoItem';
+import TodoItem from 'app/components/TodoItem';
 import { TodoModel } from 'app/models/TodoModel';
 
 export namespace TodoList {

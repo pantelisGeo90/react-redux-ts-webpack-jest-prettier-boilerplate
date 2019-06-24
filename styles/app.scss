@@ -1,0 +1,16 @@
+body {
+  margin: 0 auto !important;
+}
+
+button.with-loading {
+  position: relative;
+}
+
+button.with-loading > div:nth-child(1) {
+  position: absolute;
+  width: calc(100% - 2rem);
+
+  .spinner-border {
+    vertical-align: middle;
+  }
+}

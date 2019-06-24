@@ -11,6 +11,7 @@ var outPath = path.join(__dirname, './build');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var MiniCssExtractPlugin = require('mini-css-extract-plugin');
 var WebpackCleanupPlugin = require('webpack-cleanup-plugin');
+var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = {
   context: sourcePath,
@@ -24,7 +25,7 @@ module.exports = {
   },
   target: 'web',
   resolve: {
-    extensions: ['.js', '.ts', '.tsx'],
+    extensions: ['.js', '.ts', '.tsx', '.css', '.scss'],
     // Fix webpack's default behavior to not load packages with jsnext:main module
     // (jsnext:main directs not usually distributable es6 format, but es6 sources)
     mainFields: ['module', 'browser', 'main'],
@@ -36,7 +37,7 @@ module.exports = {
     rules: [
       // .ts, .tsx
       {
-        test: /\.tsx?$/,
+        test: /\.(ts|tsx)$/,
         use: [
           !isProduction && {
             loader: 'babel-loader',
@@ -47,11 +48,21 @@ module.exports = {
       },
       // css
       {
-        test: /\.css$/,
+        test: /\.(css|scss)$/,
+        exclude: [path.resolve(__dirname, 'node_modules'), path.resolve(__dirname, 'styles')],
         use: [
           isProduction ? MiniCssExtractPlugin.loader : 'style-loader',
           {
             loader: 'css-loader',
+            query: {
+              modules: true,
+              sourceMap: !isProduction,
+              importLoaders: 1,
+              localIdentName: isProduction ? '[hash:base64:5]' : '[local]__[hash:base64:5]'
+            }
+          },
+          {
+            loader: 'sass-loader',
             query: {
               modules: true,
               sourceMap: !isProduction,
@@ -78,6 +89,12 @@ module.exports = {
             }
           }
         ]
+      },
+      // Second CSS Loader, including node_modules, allowing to load bootstrap globally over the whole project.
+      {
+        test: /\.(css|scss)$/,
+        include: [path.resolve(__dirname, 'node_modules'), path.resolve(__dirname, 'styles')],
+        use: ['style-loader', 'css-loader', 'sass-loader']
       },
       // static assets
       { test: /\.html$/, use: 'html-loader' },
@@ -107,6 +124,11 @@ module.exports = {
     runtimeChunk: true
   },
   plugins: [
+    new BundleAnalyzerPlugin({
+      generateStatsFile: true,
+      analyzerPort: 4000, // you can change this, default is 8888
+      mode: 'server'
+    }),
     new webpack.EnvironmentPlugin({
       NODE_ENV: 'development', // use 'development' unless process.env.NODE_ENV is defined
       DEBUG: false
@@ -147,7 +169,7 @@ module.exports = {
     clientLogLevel: 'warning'
   },
   // https://webpack.js.org/configuration/devtool/
-  devtool: isProduction ? 'hidden-source-map' : 'cheap-module-eval-source-map',
+  devtool: isProduction ? 'hidden-source-map' : 'source-map',
   node: {
     // workaround for webpack-dev-server issue
     // https://github.com/webpack/webpack-dev-server/issues/60#issuecomment-103411179
