@@ -6,6 +6,7 @@ var package = require('./package.json');
 var isProduction = process.argv.indexOf('-p') >= 0 || process.env.NODE_ENV === 'production';
 var sourcePath = path.join(__dirname, './src');
 var outPath = path.join(__dirname, './build');
+var buildStats = process.argv.indexOf('-stats') >= 0; // && process.argv['buildfor'] === 'stats';
 
 // plugins
 var HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -124,11 +125,6 @@ module.exports = {
     runtimeChunk: true
   },
   plugins: [
-    new BundleAnalyzerPlugin({
-      generateStatsFile: true,
-      analyzerPort: 4000, // you can change this, default is 8888
-      mode: 'server'
-    }),
     new webpack.EnvironmentPlugin({
       NODE_ENV: 'development', // use 'development' unless process.env.NODE_ENV is defined
       DEBUG: false
@@ -177,3 +173,13 @@ module.exports = {
     net: 'empty'
   }
 };
+
+if (buildStats && isProduction) {
+  module.exports.plugins.push(
+    new BundleAnalyzerPlugin({
+      generateStatsFile: buildStats && isProduction,
+      analyzerPort: 4000, // you can change this, default is 8888
+      mode: 'server'
+    })
+  );
+}

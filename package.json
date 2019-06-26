@@ -2,7 +2,7 @@
   "name": "react-redux-ts-webpack-jest-prettier-boilerplate",
   "version": "1.0.1",
   "private": true,
-  "description": "A frontend boilerplate with React, Redux, Typescript, webpack, jest",
+  "description": "A frontend boilerplate with React, Redux, Typescript, webpack, jest, storybook, bootstrap",
   "keywords": [
     "react",
     "redux",
@@ -10,16 +10,20 @@
     "jest",
     "prettier",
     "webpack",
-    "boilerplate"
+    "boilerplate",
+    "storybook",
+    "bootstrap",
+    "reactstrap",
+    "sass"
   ],
   "main": "index.js",
   "scripts": {
     "start:test": "jest --watchAll",
     "start:dev": "webpack-dev-server --mode development --hot --progress --colors --port 3000 --open --watch",
     "start:storybook": "start-storybook -p 9001 -c .storybook",
-    "build": "webpack --mode production --env production --progress --colors",
-    "build:stats": "webpack --mode production --env production --profile --json > stats.json",
-    "prettier": "prettier --write \"src/**/*.{ts,tsx,css}\""
+    "build": "webpack -p --mode production --env production --progress --colors",
+    "build:stats": "webpack -p -stats --mode production --env production --profile --json > stats.json",
+    "prettier": "prettier --write \"src/**/*.{ts,tsx,css,scss}\""
   },
   "license": "MIT",
   "devDependencies": {
