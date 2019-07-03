@@ -72,7 +72,6 @@ class Settings extends React.Component<Settings.Props, Settings.State> {
                 </Label>
                 <Col sm={{ size: 10 }}>
                   <Field
-                    component="select"
                     name="color"
                     render={(options: FieldProps) => {
                       return (
