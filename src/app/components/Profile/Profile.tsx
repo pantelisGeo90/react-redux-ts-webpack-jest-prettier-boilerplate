@@ -110,21 +110,25 @@ class Profile extends React.Component<Profile.Props, Profile.State> {
           {isLoading ? (
             <Skeleton width={75} height={47} />
           ) : (
-            <Button
-              className={'with-loading'}
-              size="lg"
-              color="success"
-              onClick={this.saveChanges}
-              disabled={isSaving}
-              type="submit"
-            >
-              {isSaving && (
-                <div>
-                  <Spinner size="sm" color="secondary" />
-                </div>
-              )}
-              <span>Save</span>
-            </Button>
+            <FormGroup row>
+              <Col sm={{ size: 10, offset: 2 }}>
+                <Button
+                  className={'with-loading'}
+                  size="lg"
+                  color="success"
+                  onClick={this.saveChanges}
+                  disabled={isSaving}
+                  type="submit"
+                >
+                  {isSaving && (
+                    <div>
+                      <Spinner size="sm" color="secondary" />
+                    </div>
+                  )}
+                  <span>Save</span>
+                </Button>
+              </Col>
+            </FormGroup>
           )}
         </Form>
         {/* )} */}

@@ -43,3 +43,15 @@ export declare namespace Profile {
     isLoading?: boolean;
   }
 }
+
+export declare namespace Settings {
+  export interface Props {
+    // actions: ProfileActions;
+  }
+
+  export interface State {
+    editing?: boolean;
+    isSaving?: boolean;
+    isLoading?: boolean;
+  }
+}
